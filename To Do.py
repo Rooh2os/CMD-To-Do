@@ -7,7 +7,7 @@ def add_item():
     to_dos.append(input("Item to add?\n    "))
 
 def check_item():
-    item = input("Item to check off?")
+    item = input("Item to check off?\n")
     to_dos[item] = to_dos[item],"[DONE]"
 
 def remove_item():
@@ -24,8 +24,9 @@ def clear():
 def print_list(lst):
     ptr = 0
     while ptr < len(lst):
-        print("    ",lst[ptr])
+        print(ptr,":",lst[ptr])
         ptr += 1
+    print("\n")
 
 
 while selection != 4:
@@ -42,7 +43,8 @@ while selection != 4:
             break
         else:
             raise(ValueError)
-        print("Your list is now:\n")
+        print("Your list is now:")
         print_list(to_dos)
     except ValueError:
+        clear()
         print("Oops, thats not a valid choice. Try again.\n")
