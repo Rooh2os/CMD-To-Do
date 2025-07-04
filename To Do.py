@@ -1,19 +1,21 @@
-import os
+import os,json
+
 def print_list(lst):
     ptr = 0
     while ptr < len(lst):
         print(ptr,":",lst[ptr])
         ptr += 1
+
 to_dos = []
 if input("Open saved file? (y/n)\n") == "n":
     to_dos = []
 else:
     try:
         with open("data","r") as file:
-            to_dos = file.read()
+            to_dos = json.load(file)
             print_list(to_dos)
-            print(to_dos)
-    except(FileNotFoundError):
+            #print("DEBUG:",to_dos)
+    except(FileNotFoundError,):
         to_dos = []
         print("Huh, there doesent seem like there is a file.")
 selection = "nll"
@@ -61,7 +63,7 @@ while selection != 4:
                 break
             else:
                 with open("data","w") as file:
-                    file.write(str(to_dos))
+                    json.dump(to_dos,file,indent=4)
                 break
         else:
             raise(ValueError)
@@ -71,3 +73,4 @@ while selection != 4:
     except ValueError:
         clear()
         print("Oops, thats not a valid choice. Try again.\n")
+        print_list(to_dos)
