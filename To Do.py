@@ -1,5 +1,21 @@
 import os
+def print_list(lst):
+    ptr = 0
+    while ptr < len(lst):
+        print(ptr,":",lst[ptr])
+        ptr += 1
 to_dos = []
+if input("Open saved file? (y/n)\n") == "n":
+    to_dos = []
+else:
+    try:
+        with open("data","r") as file:
+            to_dos = file.read()
+            print_list(to_dos)
+            print(to_dos)
+    except(FileNotFoundError):
+        to_dos = []
+        print("Huh, there doesent seem like there is a file.")
 selection = "nll"
 
 
@@ -12,7 +28,7 @@ def check_item():
         print_list(to_dos)
         item = int(input())
         to_dos[item] = to_dos[item],"[DONE]"
-    except(ValueError):
+    except(ValueError,IndexError):
         clear()
         print("Oops, thats not a valid choice. Try again.\n")
 
@@ -27,11 +43,7 @@ def clear():
     else:
         os.system('clear')
 
-def print_list(lst):
-    ptr = 0
-    while ptr < len(lst):
-        print(ptr,":",lst[ptr])
-        ptr += 1
+
 
 
 while selection != 4:
@@ -45,7 +57,12 @@ while selection != 4:
         elif selection == 3:
             remove_item()
         elif selection == 4:
-            break
+            if input("Do you want to save? (y/n)\n") == "n":
+                break
+            else:
+                with open("data","w") as file:
+                    file.write(str(to_dos))
+                break
         else:
             raise(ValueError)
         print("Your list is now:")
