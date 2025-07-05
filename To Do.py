@@ -3,6 +3,7 @@ selection = "nll"
 listn = 0
 master = []
 to_dos = []
+savedata = []
 
 def print_list(lst):
     global master
@@ -15,21 +16,24 @@ def print_list(lst):
 def write():
     global master
     global to_dos
+    global listn
     master[listn] = to_dos
     with open("data","w") as file:
-                json.dump(master,file,indent=4)
+        json.dump(master,file,indent=0)
+    with open("savedata","w") as file:
+        json.dump(savedata,file,indent=0)
 
 def switch_list():
     global master
     global to_dos
     global listn
-    clear()
     if ['New list'] not in master:
         master.append(['New list'])
     try:
         #print("DEBUG:",master)
+        print("Your lists:")
         print_list(master)
-        print("List to switch too?\nInput a number to select.")
+        print("\nList to switch to?\nInput a number to select a list.")
         listn = int(input())
         to_dos = master[listn]
         #print("DEBUG:",to_dos)
@@ -60,7 +64,7 @@ def check_item():
 def remove_item():
     global master
     global to_dos
-    to_dos.remove(input("Item to remove?\n"))
+    to_dos.remove(input("Item to remove?\nType an entry in your list\n"))
 
 def clear():
     # For Windows
@@ -77,6 +81,19 @@ try:
 except(FileNotFoundError,):
     master = []
     print("No file found. Making new file")
+
+try:
+    with open("savedata","r") as file:
+        savedata = json.load(file)
+        #print("DEBUG:",master)
+except(FileNotFoundError,):
+    print("No save data found. Making new save data")
+    savedata = [0,0]
+#print("DEBUG:",savedata[1])
+#print("DEBUG:",savedata[1] == 0)
+if savedata[1] == 0:
+    print("Welcome to To-Do CLI\n\nThis is a simple program for making To-Do lists.\nYou will be prompted to select a list. To make a new list type the number next to ['New list'].\nTo select a previously made list type the number next to the desired list.\nWhen prompted to type a number type a number (eg. 1) then press enter.\nWhen promped to type an entry in your list type type an entry in your list (eg. mow lawn).\nYou are now ready to use this program\nHave fun and get things done!\n")
+    savedata[1] = 1
 
 switch_list()
 
