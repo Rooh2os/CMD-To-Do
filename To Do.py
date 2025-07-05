@@ -13,29 +13,32 @@ else:
     try:
         with open("data","r") as file:
             to_dos = json.load(file)
+            print("")
             print_list(to_dos)
             #print("DEBUG:",to_dos)
     except(FileNotFoundError,):
         to_dos = []
-        print("Huh, there doesent seem like there is a file.")
+        print("Huh, it doesent seem like there is a file.")
 selection = "nll"
 
 
 def add_item():
-    to_dos.append(input("Item to add?\n"))
+    to_dos.append(input("\nItem to add?\n"))
+
 
 def check_item():
     try:
-        print("Item to check off?")
-        print_list(to_dos)
+        print("Item to check off?\nInput a number to select.")
         item = int(input())
         to_dos[item] = to_dos[item],"[DONE]"
     except(ValueError,IndexError):
         clear()
         print("Oops, thats not a valid choice. Try again.\n")
 
+
 def remove_item():
     to_dos.remove(input("Item to remove?\n"))
+
 
 def clear():
     # For Windows
@@ -50,8 +53,9 @@ def clear():
 
 while selection != 4:
     try:
-        selection = int(input("1: Add item\n2: Check off item\n3: Remove item\n4: Exit program\n"))
+        selection = int(input("\nInput a number to select.\n1: Add item\n2: Check off item\n3: Remove item\n4: Exit program\n"))
         clear()
+        print_list(to_dos)
         if selection == 1:
             add_item()
         elif selection == 2:
@@ -67,9 +71,10 @@ while selection != 4:
                 break
         else:
             raise(ValueError)
+        clear()
         print("Your list is now:")
         print_list(to_dos)
-        print("\n")
+        print("")
     except ValueError:
         clear()
         print("Oops, thats not a valid choice. Try again.\n")
