@@ -7,7 +7,7 @@ def print_list(lst):
         ptr += 1
 
 if input("Open saved file? (y/n)\n") == "n":
-    to_dos = []
+    master_lst = []
 else:
     try:
         with open("data","r") as file:
@@ -18,7 +18,6 @@ else:
     except(FileNotFoundError,):
         to_dos = []
         print("Huh, it doesent seem like there is a file.")
-selection = "nll"
 
 
 def add_item():
@@ -36,7 +35,7 @@ def check_item():
 
 
 def remove_item():
-    to_dos.remove(input("Item to remove?\n"))
+    to_dos.remove(input("Item to remove?\nInput text to select.\n"))
 
 
 def clear():
@@ -48,7 +47,7 @@ def clear():
         os.system('clear')
 
 
-
+selection = "nll"
 
 while selection != 4:
     try:
