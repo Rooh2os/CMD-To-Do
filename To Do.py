@@ -49,6 +49,7 @@ def clear():
 
 
 
+
 while selection != 4:
     try:
         selection = int(input("\nInput a number to select.\n1: Add item\n2: Check off item\n3: Remove item\n4: Exit program\n"))
