@@ -6,7 +6,6 @@ def print_list(lst):
         print(ptr,":",lst[ptr])
         ptr += 1
 
-to_dos = []
 if input("Open saved file? (y/n)\n") == "n":
     to_dos = []
 else:
