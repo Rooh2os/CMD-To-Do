@@ -56,7 +56,7 @@ def check_item():
     try:
         print("Item to check off?\nInput a number to select.")
         item = int(input())
-        to_dos[item] = to_dos[item],"[DONE]"
+        to_dos[item] = f"{to_dos[item]} [DONE]"
     except(ValueError,IndexError):
         clear()
         print("Oops, thats not a valid choice. Try again.\n")
